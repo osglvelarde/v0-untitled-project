@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Search } from "lucide-react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { Input } from "@/components/ui/input"
@@ -13,6 +13,11 @@ export function SearchForm() {
   const searchParams = useSearchParams()
   const [searchQuery, setSearchQuery] = useState(searchParams.get("q") || "")
 
+  // Update search query when URL changes
+  useEffect(() => {
+    setSearchQuery(searchParams.get("q") || "")
+  }, [searchParams])
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     const params = new URLSearchParams(searchParams)
@@ -22,6 +27,9 @@ export function SearchForm() {
     } else {
       params.delete("q")
     }
+
+    // Reset to page 1 when search changes
+    params.set("page", "1")
 
     router.push(`?${params.toString()}`)
   }

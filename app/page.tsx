@@ -1,13 +1,11 @@
 import Link from "next/link"
 import { GuidelinesTable } from "@/components/guidelines-table"
-import { SearchForm } from "@/components/search-form"
 
 export default function AccessibilityGuidelines() {
   return (
     <div className="container mx-auto px-4 py-8">
       <header className="mb-8">
         <h1 className="text-4xl font-bold mb-4">Section 508 & WCAG Accessibility Guidelines</h1>
-        <SearchForm />
       </header>
 
       <main>
@@ -73,7 +71,14 @@ export default function AccessibilityGuidelines() {
             >
               WCAG 2.2 Specification
             </Link>
-            
+            <Link
+              href="https://aaardvarkaccessibility.com/wcag-plain-english/"
+              className="text-blue-600 hover:underline font-medium"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              WCAG in Plain English
+            </Link>
           </div>
         </section>
 
@@ -81,7 +86,7 @@ export default function AccessibilityGuidelines() {
           <h2 className="text-2xl font-semibold mb-4">WCAG 2.2 Guidelines</h2>
           <p className="mb-6">
             Below is a comprehensive table of WCAG 2.2 guidelines with links to the official W3C documentation. Use the
-            search box above to filter guidelines by keyword.
+            filters to narrow down guidelines by level, principle, or search by keyword.
           </p>
           <GuidelinesTable />
         </section>
