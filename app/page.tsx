@@ -73,14 +73,7 @@ export default function AccessibilityGuidelines() {
             >
               WCAG 2.2 Specification
             </Link>
-            <Link
-              href="https://aaardvarkaccessibility.com/wcag-plain-english/"
-              className="text-blue-600 hover:underline font-medium"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              WCAG in Plain English
-            </Link>
+            
           </div>
         </section>
 
