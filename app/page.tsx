@@ -86,15 +86,19 @@ export default function AccessibilityGuidelines() {
               WCAG 2.2 Specifications
             </Link>
             <Link
-              href="/readability"
-              className="text-blue-600 hover:underline font-medium"
-            >
-              Readability Metrics
+             href="https://iaccessible.com/readability-guidelines/"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="text-blue-600 hover:underline font-medium"
+>
+  Readability Metrics
             </Link>
             <Link
-              href="/pdf-accessibility"
-              className="text-blue-600 hover:underline font-medium"
-            >
+              href="https://iaccessible.com/pdf-guidelines/"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="text-blue-600 hover:underline font-medium"
+>
               PDF Accessibility Guidelines
             </Link>
           </div>
