@@ -12,7 +12,7 @@ export default function ReadabilityPage() {
             href="https://iaccessible.com/wcag-guidelines/"
   
   rel="noopener noreferrer"
-  className="text-blue-600 hover:underline font-medium"
+  className="text-blue-600 hover:underline flex items-center gap-1"
           >
             &larr; Back to Section 508 Guidelines
           </Link>
