@@ -9,7 +9,7 @@ export default function PdfUaAccessibility() {
       <header>
         <div className="mb-4 flex flex-col gap-2">
           <Link
-            href="https://iaccessible.com/wcag-guidelines/"
+            href="https://iaccessible.com/wcagguidelines/"
   
   rel="noopener noreferrer"
             target="_blank"
