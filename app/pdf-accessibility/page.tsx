@@ -9,13 +9,15 @@ export default function PdfUaAccessibility() {
       <header>
         <div className="mb-4 flex flex-col gap-2">
           <Link
-            href="/"
-            className="text-blue-600 hover:underline flex items-center gap-1"
+            href="https://iaccessible.com/wcag-guidelines/"
+  
+  rel="noopener noreferrer"
+  className="text-blue-600 hover:underline flex items-center gap-1"
           >
             &larr; Back to Section 508 Guidelines
           </Link>
           <Link
-            href="/readability"
+            href="https://iaccessible.com/readability-guidelines/"
             className="text-blue-600 hover:underline flex items-center gap-1"
           >
             &larr; Back to Readability Metrics and Text Analysis
