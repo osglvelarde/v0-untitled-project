@@ -89,12 +89,14 @@ export default function AccessibilityGuidelines() {
              href="https://iaccessible.com/readability-guidelines/"
   
   rel="noopener noreferrer"
+              target="_blank"
   className="text-blue-600 hover:underline font-medium"
 >
   Readability Metrics
             </Link>
             <Link
               href="https://iaccessible.com/pdf-guidelines/"
+              target="_blank"
   
   rel="noopener noreferrer"
   className="text-blue-600 hover:underline font-medium"
