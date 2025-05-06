@@ -12,12 +12,14 @@ export default function PdfUaAccessibility() {
             href="https://iaccessible.com/wcag-guidelines/"
   
   rel="noopener noreferrer"
+            target="_blank"
   className="text-blue-600 hover:underline flex items-center gap-1"
           >
             &larr; Back to Section 508 Guidelines
           </Link>
           <Link
             href="https://iaccessible.com/readability-guidelines/"
+            target="_blank"
             className="text-blue-600 hover:underline flex items-center gap-1"
           >
             &larr; Back to Readability Metrics and Text Analysis
