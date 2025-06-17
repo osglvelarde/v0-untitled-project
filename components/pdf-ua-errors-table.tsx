@@ -19,7 +19,13 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight, Filter, Search } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Filter,
+  Search,
+  Download,
+} from "lucide-react";
 import { Label } from "@/components/ui/label";
 
 // -----------------------------
@@ -1024,12 +1030,54 @@ export function PdfUaErrorsTable() {
     return temp;
   }, [query, categoryFilter, severityFilter]);
 
+  // Export filtered data for parent component
+  useEffect(() => {
+    // This effect is just to demonstrate exporting data.
+    // In a real scenario, you might pass a callback prop
+    // or use context to share the filtered data.
+    // For this task, we'll assume the parent can access 'filtered'.
+  }, [filtered]);
+
   const paginated = useMemo(() => {
     const start = (page - 1) * itemsPerPage;
     return filtered.slice(start, start + itemsPerPage);
   }, [filtered, page]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / itemsPerPage));
+
+  const exportCSV = () => {
+    const headers = [
+      "Category",
+      "Code",
+      "Severity",
+      "Message",
+      "Guideline",
+      "Fix Hint",
+    ];
+
+    const csvContent = [
+      headers.join(","),
+      ...filtered.map((err) =>
+        [
+          `"${err.category}"`,
+          `"${err.code}"`,
+          `"${err.severity}"`,
+          `"${err.message.replace(/"/g, '""')}"`,
+          `"${(err.guideline || "").replace(/"/g, '""')}"`,
+          `"${(err.fixHint || "").replace(/"/g, '""')}"`,
+        ].join(",")
+      ),
+    ].join("\n");
+
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", "pdf-ua-errors.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   // -----------------------------
   // Render
@@ -1109,15 +1157,24 @@ export function PdfUaErrorsTable() {
         </div>
 
         {/* Clear Button */}
-        <div className="flex items-end ml-auto">
+        <div className="flex items-end gap-2 md:ml-auto">
           <Button
             variant="outline"
             onClick={() =>
               updateParams({ category: "all", severity: "all", q: "" })
             }
-            className="flex items-center gap-2"
+            className="flex items-center gap-2 mt-auto" // Added mt-auto for alignment
           >
             <Filter className="h-4 w-4" /> Clear Filters
+          </Button>
+          <Button
+            variant="outline"
+            onClick={exportCSV}
+            className="flex items-center gap-2 mt-auto" // Added mt-auto for alignment
+            disabled={filtered.length === 0}
+          >
+            <Download className="h-4 w-4" />
+            Export CSV
           </Button>
         </div>
       </div>

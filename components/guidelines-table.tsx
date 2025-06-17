@@ -1564,38 +1564,53 @@ export function GuidelinesTable() {
       </div>
 
       {/* Table */}
-      <div className="rounded-md border">
-        <Table>
-          <TableCaption>
+      <div className="rounded-md border overflow-x-auto">
+        <Table className="min-w-full">
+          {" "}
+          {/* Added min-w-full to ensure table takes at least full width before scrolling */}
+          <TableCaption className="sticky left-0">
+            {" "}
+            {/* Optional: make caption sticky if desired */}
             Showing {paginatedGuidelines.length} of {filteredGuidelines.length}{" "}
-            guidelines
+            guidelines.
           </TableCaption>
           <TableHeader>
             <TableRow>
-              <TableHead>Success Criterion</TableHead>
-              <TableHead>Principle</TableHead>
-              <TableHead>Guideline</TableHead>
-              <TableHead>Level</TableHead>
-              <TableHead>Version</TableHead>
-              <TableHead>Summary</TableHead>
-              <TableHead>Reference</TableHead>
-              <TableHead>Impacts & Tags</TableHead>
+              <TableHead className="whitespace-nowrap">
+                Success Criterion
+              </TableHead>
+              <TableHead className="whitespace-nowrap">Principle</TableHead>
+              <TableHead className="whitespace-nowrap">Guideline</TableHead>
+              <TableHead className="whitespace-nowrap">Level</TableHead>
+              <TableHead className="whitespace-nowrap">Version</TableHead>
+              <TableHead>Summary</TableHead> {/* Summary can wrap */}
+              <TableHead className="whitespace-nowrap">Reference</TableHead>
+              <TableHead className="whitespace-nowrap">
+                Impacts & Tags
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {paginatedGuidelines.map((g) => (
               <TableRow key={g.id}>
-                <TableCell>
+                <TableCell className="whitespace-nowrap">
                   {g.id} – {g.guideline}
                 </TableCell>
-                <TableCell>{g.principle}</TableCell>
-                <TableCell>{g.guideline}</TableCell>
-                <TableCell>
+                <TableCell className="whitespace-nowrap">
+                  {g.principle}
+                </TableCell>
+                <TableCell className="whitespace-nowrap">
+                  {g.guideline}
+                </TableCell>
+                <TableCell className="whitespace-nowrap">
                   <Badge className={getLevelColor(g.level)}>{g.level}</Badge>
                 </TableCell>
-                <TableCell>{g.version}</TableCell>
-                <TableCell>{g.summary}</TableCell>
-                <TableCell>
+                <TableCell className="whitespace-nowrap">{g.version}</TableCell>
+                <TableCell className="min-w-[300px]">
+                  {g.summary}
+                </TableCell>{" "}
+                {/* Example: Give summary a min-width */}
+                <TableCell className="whitespace-nowrap">
                   <a
                     href={g.w3cLink}
                     target="_blank"
@@ -1605,16 +1620,22 @@ export function GuidelinesTable() {
                     W3C Link
                   </a>
                 </TableCell>
-                <TableCell className="flex flex-wrap gap-1">
-                  {[...g.impacts, ...g.tags].map((item) => (
-                    <Badge
-                      key={item}
-                      variant={g.impacts.includes(item) ? "default" : "outline"}
-                      className="text-xs"
-                    >
-                      {item}
-                    </Badge>
-                  ))}
+                <TableCell className="whitespace-nowrap">
+                  <div className="flex flex-wrap gap-1">
+                    {" "}
+                    {/* Ensure badges can wrap if cell width is constrained */}
+                    {[...g.impacts, ...g.tags].map((item) => (
+                      <Badge
+                        key={item}
+                        variant={
+                          g.impacts.includes(item) ? "default" : "outline"
+                        }
+                        className="text-xs"
+                      >
+                        {item}
+                      </Badge>
+                    ))}
+                  </div>
                 </TableCell>
               </TableRow>
             ))}

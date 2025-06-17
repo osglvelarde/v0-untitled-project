@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import {
   Table,
   TableBody,
@@ -36,7 +36,8 @@ const coreTerminology: CoreTerm[] = [
   },
   {
     term: "Semantic Structure",
-    description: "The set of meaningful tags that describe each content element’s role.",
+    description:
+      "The set of meaningful tags that describe each content element’s role.",
     importance:
       "Provides context to AT, allowing correct pronunciation, navigation, and re‑flow on small screens.",
   },
@@ -48,23 +49,28 @@ const coreTerminology: CoreTerm[] = [
   },
   {
     term: "Alternative Text (Alt Text)",
-    description: "Textual descriptions for non‑text content (e.g., images, figures).",
+    description:
+      "Textual descriptions for non‑text content (e.g., images, figures).",
     importance: "Conveys essential information to users who cannot see images.",
   },
   {
     term: "Artifacts",
-    description: "Visual objects (page numbers, decorative lines) marked so AT ignores them.",
+    description:
+      "Visual objects (page numbers, decorative lines) marked so AT ignores them.",
     importance: "Prevents distraction and preserves meaningful reading order.",
   },
   {
     term: "Metadata (Title & Language)",
-    description: "XMP metadata declaring document title (dc:title) and primary language (dc:language).",
-    importance: "Allows AT to announce the title correctly and use the right pronunciation rules.",
+    description:
+      "XMP metadata declaring document title (dc:title) and primary language (dc:language).",
+    importance:
+      "Allows AT to announce the title correctly and use the right pronunciation rules.",
   },
   {
     term: "Font Embedding",
     description: "Inclusion of complete font programs within the PDF.",
-    importance: "Guarantees text renders and maps to Unicode consistently on every device.",
+    importance:
+      "Guarantees text renders and maps to Unicode consistently on every device.",
   },
   {
     term: "Unicode Mapping",
@@ -80,20 +86,29 @@ const coreTerminology: CoreTerm[] = [
 ];
 
 // ---- Component --------------------------------------------------------
-export function PdfUaCoreTable() {
+interface PdfUaCoreTableProps {
+  onFilteredDataChange?: (data: CoreTerm[]) => void;
+}
+
+export function PdfUaCoreTable({ onFilteredDataChange }: PdfUaCoreTableProps) {
   const [query, setQuery] = useState<string>("");
   const [rows, setRows] = useState<CoreTerm[]>(coreTerminology);
 
-  useEffect(() => {
-    if (!query) return setRows(coreTerminology);
+  const filteredRows = useMemo(() => {
+    if (!query) return coreTerminology;
 
     const lower = query.toLowerCase();
-    setRows(
-      coreTerminology.filter((t) =>
-        (t.term + t.description + t.importance).toLowerCase().includes(lower)
-      )
+    return coreTerminology.filter((t) =>
+      (t.term + t.description + t.importance).toLowerCase().includes(lower)
     );
   }, [query]);
+
+  useEffect(() => {
+    setRows(filteredRows);
+    if (onFilteredDataChange) {
+      onFilteredDataChange(filteredRows);
+    }
+  }, [filteredRows, onFilteredDataChange]);
 
   return (
     <div className="space-y-4">
