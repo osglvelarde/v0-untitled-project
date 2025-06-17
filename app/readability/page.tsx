@@ -9,13 +9,18 @@ export default function ReadabilityPage() {
       <header className="mb-8">
         <div className="mb-4 flex gap-4">
           <Link
-            href="/"
-            className="text-blue-600 hover:underline flex items-center gap-1"
+            href="https://iaccessible.com/wcagguidelines/"
+  
+  rel="noopener noreferrer"
+            target="_blank"
+  className="text-blue-600 hover:underline flex items-center gap-1"
           >
             &larr; Back to Section 508 Guidelines
           </Link>
           <Link
-            href="/pdf-accessibility"
+            href="https://iaccessible.com/pdf-guidelines/"
+            rel="noopener noreferrer"
+            target="_blank"
             className="text-blue-600 hover:underline flex items-center gap-1"
           >
             PDF Accessibility &rarr;
